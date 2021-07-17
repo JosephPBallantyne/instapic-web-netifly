@@ -2,6 +2,7 @@
   "name": "instapic",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://josephpballantyne.github.io/josephpballantyne.github.io",
   "dependencies": {
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
@@ -23,7 +24,9 @@
   "scripts": {
     "start": "REACT_APP_ENV=local PORT=8080 react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gsutil rsync -R build gs://instapic-web"
+    "deploy-gcp": "gsutil rsync -R build gs://instapic-web",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
