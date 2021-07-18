@@ -2,7 +2,7 @@
   "name": "instapic",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://josephpballantyne.github.io/josephpballantyne.github.io",
+  "homepage": ".",
   "dependencies": {
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
