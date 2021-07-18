@@ -1,3 +1,1 @@
-# instapic-web-heroku
-
-# josephpballantyne.github.io
+# instapic-web-netifly
