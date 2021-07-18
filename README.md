@@ -1,3 +1,3 @@
 # instapic-web-netifly
 
-build
+https://condescending-jones-7811de.netlify.app/

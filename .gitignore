@@ -2,4 +2,3 @@
 .env
 .DS_Store
 .eslintcache
-/build_local
