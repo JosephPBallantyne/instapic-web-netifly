@@ -6,8 +6,22 @@ interface Auth {
   username: string | null;
 }
 
-const refreshedAuth = window.localStorage.getItem('authenticated');
-const refreshedUser = window.localStorage.getItem('username');
+function getWithExpiry(key: string) {
+  const itemStr = window.localStorage.getItem(key);
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    window.localStorage.removeItem(key);
+    return null;
+  }
+  return item.value;
+}
+
+const refreshedAuth = getWithExpiry('authenticated');
+const refreshedUser = getWithExpiry('username');
 
 const initialState: Auth = {
   authenticated: !!refreshedAuth,
@@ -18,8 +32,22 @@ const auth = function (state = initialState, action: AnyAction) {
   switch (action.type) {
     case LOGIN: {
       const { username } = action.payload;
-      window.localStorage.setItem('authenticated', 'true');
-      window.localStorage.setItem('username', username);
+      const now = new Date();
+      const ttl = 60 * 1000 * 20;
+      window.localStorage.setItem(
+        'authenticated',
+        JSON.stringify({
+          value: 'true',
+          expiry: now.getTime() + ttl,
+        })
+      );
+      window.localStorage.setItem(
+        'username',
+        JSON.stringify({
+          value: username,
+          expiry: now.getTime() + ttl,
+        })
+      );
       return {
         authenticated: true,
         username,
